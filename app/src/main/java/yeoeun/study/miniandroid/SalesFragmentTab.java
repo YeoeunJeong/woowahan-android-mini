@@ -25,6 +25,7 @@ import retrofit2.Retrofit;
 import yeoeun.study.adapter.ListviewAdapter;
 import yeoeun.study.model.SalesStock;
 import yeoeun.study.service.SalesStocksService;
+import yeoeun.study.service.TestService;
 
 /**
  * Created by elite on 16. 1. 19..
@@ -32,7 +33,7 @@ import yeoeun.study.service.SalesStocksService;
 public class SalesFragmentTab extends Fragment {
     //    private static FragmentActivity activity;
 
-    static String IP_ADDR = "http://10.10.0.164:5555";
+    static final String IP_ADDR = "http://10.10.0.164:5555";
     private SalesStock salesStock;
     private Activity activity;
     private String id;
@@ -53,27 +54,18 @@ public class SalesFragmentTab extends Fragment {
         Intent intent = activity.getIntent();
         id = intent.getStringExtra("salesStockId");
 
-        if (id != null) {
-            Log.i("salesFragment", id);
-        } else {
-//            Log.i("salesFragment id null", MiniMainActivity.getSalesStockId());
-        }
-
         if(intent.getBooleanExtra("soldOut", false) == true) {
-            salesBtn.setClickable(false);
+//            salesBtn.setClickable(false);
+            salesBtn.setEnabled(false);
+        } else {
+            salesBtn.setEnabled(true);
         }
         return view;
     }
 
     @OnClick(R.id.sales_fragment_button)
     void sellOnClick() {
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(IP_ADDR)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        SalesStocksService service = retrofit.create(SalesStocksService.class);
-
+        SalesStocksService service = TestService.getInstance().getSalesStocksService();
         String salesVolume = salesVolumeEdit.getText().toString();
         Call<SalesStock> salesStockCall = service.updateSales("4", id, salesVolume);
 
@@ -81,8 +73,6 @@ public class SalesFragmentTab extends Fragment {
             @Override
             public void onResponse(Response<SalesStock> response) {
                 SalesFragmentTab.this.salesStock = response.body();
-
-//                Log.i("test", SalesFragmentTab.this.salesStock.getCosmetic().getName());
             }
 
             @Override

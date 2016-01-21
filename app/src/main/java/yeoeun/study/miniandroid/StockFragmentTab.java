@@ -21,12 +21,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import yeoeun.study.model.SalesStock;
 import yeoeun.study.service.SalesStocksService;
+import yeoeun.study.service.TestService;
 
 /**
  * Created by elite on 16. 1. 19..
  */
 public class StockFragmentTab extends Fragment {
-    static String IP_ADDR = "http://10.10.0.164:5555";
+
     private SalesStock salesStock;
     private Activity activity;
     private String id;
@@ -52,13 +53,10 @@ public class StockFragmentTab extends Fragment {
     @OnClick(R.id.stock_fragment_button)
     void stockOnClick() {
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(IP_ADDR)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        SalesStocksService service = retrofit.create(SalesStocksService.class);
+        SalesStocksService service = TestService.getInstance().getSalesStocksService();
 
         String orderVolume = stockVolumeEdit.getText().toString();
+
 
         Call<SalesStock> salesStockCall = service.updateOrder("4", id, orderVolume);
 
@@ -76,4 +74,6 @@ public class StockFragmentTab extends Fragment {
 
         getActivity().finish();
     }
+
+
 }

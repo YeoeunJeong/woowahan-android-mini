@@ -58,7 +58,6 @@ public class ListviewAdapter extends BaseAdapter {
         }
 
         SalesStock salesStock = arrayList.get(position);
-        Log.i("***", salesStock.getCosmetic().getName() + ", " + salesStock.getSales_volume() + ", " + salesStock.getStock_volume());
 
         holder.textCosmeticNm.setText("" + salesStock.getCosmetic().getName());
         holder.textSalesVolume.setText(salesStock.getSales_volume() + "개");
