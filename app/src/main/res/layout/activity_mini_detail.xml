@@ -16,9 +16,9 @@
         <TextView
             android:id="@+id/detail_cosmetic_nm_textview"
             android:layout_width="wrap_content"
-            android:textColor="#ffffff"
             android:layout_height="wrap_content"
-            android:text="화장품명" />
+            android:text="화장품명"
+            android:textColor="#ffffff" />
     </LinearLayout>
 
 
@@ -33,6 +33,7 @@
             android:id="@+id/detail_cosmetic_price_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:text="가격" />
 
         <LinearLayout
@@ -41,16 +42,28 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/detail_stock_volume_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="재고량" />
-
-            <TextView
                 android:id="@+id/detail_sales_volume_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:text="판매량" />
+
+
+            <TextView
+                android:id="@+id/detail_stock_volume_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="재고량" />
+
+            <Button
+                android:id="@+id/detail_order_volume_button"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginLeft="20dp"
+                android:background="#ffffff"
+                android:text="재고 받기"
+                android:visibility="invisible" />
         </LinearLayout>
     </LinearLayout>
 

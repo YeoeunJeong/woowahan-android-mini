@@ -1,6 +1,7 @@
 package yeoeun.study.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,7 +62,18 @@ public class ListviewAdapter extends BaseAdapter {
 
         holder.textCosmeticNm.setText("" + salesStock.getCosmetic().getName());
         holder.textSalesVolume.setText(salesStock.getSales_volume() + "개");
-        holder.textStockVolume.setText(salesStock.getStock_volume() + "개");
+
+        if (salesStock.isSold_out()) {
+            holder.textStockVolume.setTextColor(convertView.getResources().getIntArray(R.array.colors)[0]);
+        } else {
+            holder.textStockVolume.setTextColor(convertView.getResources().getIntArray(R.array.colors)[3]);
+        }
+
+        if (salesStock.getOrder_volume() == 0) {
+            holder.textStockVolume.setText(salesStock.getStock_volume() + "개");
+        } else {
+            holder.textStockVolume.setText(salesStock.getStock_volume() + " (" + salesStock.getOrder_volume() + ")개");
+        }
         return convertView;
     }
 

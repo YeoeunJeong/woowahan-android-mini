@@ -50,7 +50,6 @@ public class StockFragmentTab extends Fragment {
 
     @OnClick(R.id.stock_fragment_button)
     void stockOnClick() {
-
         SalesStocksService service = RetrofitService.getInstance().getSalesStocksService();
 
         String orderVolume = stockVolumeEdit.getText().toString();
@@ -61,6 +60,7 @@ public class StockFragmentTab extends Fragment {
             @Override
             public void onResponse(Response<SalesStock> response) {
                 StockFragmentTab.this.salesStock = response.body();
+                getActivity().finish();
             }
 
             @Override
@@ -68,9 +68,5 @@ public class StockFragmentTab extends Fragment {
                 Log.i("test", t.getMessage());
             }
         });
-
-        getActivity().finish();
     }
-
-
 }

@@ -33,7 +33,6 @@ import static android.widget.Toast.LENGTH_SHORT;
 //import java.util.List;
 
 public class MiniMainActivity extends AppCompatActivity {
-    static String IP_ADDR = "http://10.10.0.164:5555";
     private ArrayList<SalesStock> arrayList;
     private List<SalesStock> salesStockList;
     private ListviewAdapter listAdapter;
@@ -72,25 +71,23 @@ public class MiniMainActivity extends AppCompatActivity {
         listAdapter = new ListviewAdapter(this, arrayList, R.layout.list_item);
         listView.setAdapter(listAdapter);
         listView.setOnItemClickListener(onClickListItem);
-
-//        refreshData();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        // useId "0" : 모든 상품 목록 가져오기
         refreshData("0");
     }
 
     public void refreshData(String useId) {
         SalesStocksService service = RetrofitService.getInstance().getSalesStocksService();
         Call<List<SalesStock>> salesStocks;
-//        if (!useId.equals("0")) {
-            salesStocks = service.getSalesStocksList("4", useId);
-//
-//        } else {
-//            salesStocks = service.getSalesStocksList("4", null);
-//        }
+
+        // useId 에 따라 상품 목록 리스팅
+        // 0 : 모든상품 // 1 : 기초 // 2 : 메이크업 // 3 : 향수 // 4 : 바디
+        salesStocks = service.getSalesStocksList("4", useId);
 
         salesStocks.enqueue(new Callback<List<SalesStock>>() {
             @Override
@@ -113,11 +110,6 @@ public class MiniMainActivity extends AppCompatActivity {
         });
     }
 
-//    @OnItemSelected(R.id.spinner)
-//    void onUseSelected() {
-//
-//    }
-
     private AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -126,18 +118,22 @@ public class MiniMainActivity extends AppCompatActivity {
 
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
-//            refreshData("");
         }
     };
 
     private AdapterView.OnItemClickListener onClickListItem = new AdapterView.OnItemClickListener() {
 
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Toast.makeText(MiniMainActivity.this, arrayList.get(position).getCosmetic().getName(), Toast.LENGTH_SHORT).show();
             // 이벤트 발생 시 해당 아이템 위치의 텍스트를 출력
+            Toast.makeText(MiniMainActivity.this, arrayList.get(position).getCosmetic().getName(), Toast.LENGTH_SHORT).show();
+
+
             Intent intent = new Intent(MiniMainActivity.this, MiniDetailActivity.class);
             intent.putExtra("cosmeticNm", arrayList.get(position).getCosmetic().getName());
             intent.putExtra("salesStockId", arrayList.get(position).getId() + "");
+            intent.putExtra("salesVolume", arrayList.get(position).getSales_volume() + "");
+            intent.putExtra("stockVolume", arrayList.get(position).getStock_volume() + "");
+            intent.putExtra("orderVolume", arrayList.get(position).getOrder_volume() + "");
             intent.putExtra("soldOut", arrayList.get(position).isSold_out());
 
             Log.i("**", arrayList.get(position).getCosmetic().getId() + ", " + arrayList.get(position).getCosmetic().getName());
