@@ -14,7 +14,8 @@ import yeoeun.study.model.SalesStock;
  */
 public interface SalesStocksService {
     @GET("/shops/{shop_id}/sales_stocks.json")
-    Call<List<SalesStock>> getSalesStocksList(@Path("shop_id") String shopId);
+    Call<List<SalesStock>> getSalesStocksList(@Path("shop_id") String shopId,
+                                              @Query("use_id") String useId);
 
     @PUT("/shops/{shop_id}/sales_stocks/{id}.json")
     Call<SalesStock> updateSales(@Path("shop_id") String shopId, @Path("id") String id,

@@ -20,16 +20,13 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnItemSelected;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.GsonConverterFactory;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 import yeoeun.study.adapter.ListviewAdapter;
 import yeoeun.study.model.SalesStock;
 import yeoeun.study.service.SalesStocksService;
-import yeoeun.study.service.TestService;
+import yeoeun.study.service.RetrofitService;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
@@ -82,12 +79,18 @@ public class MiniMainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        refreshData();
+        refreshData("0");
     }
 
-    public void refreshData() {
-        SalesStocksService service = TestService.getInstance().getSalesStocksService();
-        Call<List<SalesStock>> salesStocks = service.getSalesStocksList("4");
+    public void refreshData(String useId) {
+        SalesStocksService service = RetrofitService.getInstance().getSalesStocksService();
+        Call<List<SalesStock>> salesStocks;
+//        if (!useId.equals("0")) {
+            salesStocks = service.getSalesStocksList("4", useId);
+//
+//        } else {
+//            salesStocks = service.getSalesStocksList("4", null);
+//        }
 
         salesStocks.enqueue(new Callback<List<SalesStock>>() {
             @Override
@@ -118,12 +121,12 @@ public class MiniMainActivity extends AppCompatActivity {
     private AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+            refreshData(String.valueOf(position));
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
-
+//            refreshData("");
         }
     };
 

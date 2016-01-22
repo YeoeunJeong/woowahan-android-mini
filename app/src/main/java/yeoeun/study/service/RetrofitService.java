@@ -6,18 +6,18 @@ import retrofit2.Retrofit;
 /**
  * Created by elite on 16. 1. 21..
  */
-public class TestService {
+public class RetrofitService {
     static final String IP_ADDR = "http://10.10.0.164:5555";
-    private static TestService instance;
+    private static RetrofitService instance;
 
-    private TestService() {
+    private RetrofitService() {
     }
 
-    public static TestService getInstance() {
-        if (instance == null) {//있는지 체크 없으면
-            instance = new TestService(); //생성한뒤
+    public static RetrofitService getInstance() {
+        if (instance == null) {
+            instance = new RetrofitService();
         }
-        return instance;//성성자를 넘긴다.
+        return instance;
     }
 
     public SalesStocksService getSalesStocksService() {

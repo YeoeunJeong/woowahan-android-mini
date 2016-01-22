@@ -16,12 +16,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.GsonConverterFactory;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 import yeoeun.study.model.SalesStock;
 import yeoeun.study.service.SalesStocksService;
-import yeoeun.study.service.TestService;
+import yeoeun.study.service.RetrofitService;
 
 /**
  * Created by elite on 16. 1. 19..
@@ -53,10 +51,9 @@ public class StockFragmentTab extends Fragment {
     @OnClick(R.id.stock_fragment_button)
     void stockOnClick() {
 
-        SalesStocksService service = TestService.getInstance().getSalesStocksService();
+        SalesStocksService service = RetrofitService.getInstance().getSalesStocksService();
 
         String orderVolume = stockVolumeEdit.getText().toString();
-
 
         Call<SalesStock> salesStockCall = service.updateOrder("4", id, orderVolume);
 
