@@ -13,10 +13,19 @@
         android:orientation="horizontal"
         android:padding="20dp">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/innisfree" />
+
         <TextView
             android:id="@+id/main_shop_nm_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
             android:text="이니스프리 잠실점"
             android:textColor="#ffffff" />
     </LinearLayout>
@@ -32,8 +41,8 @@
             android:id="@+id/spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             android:layout_marginRight="70dp"
+            android:layout_weight="2"
             android:spinnerMode="dropdown" />
 
         <TextView

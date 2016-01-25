@@ -72,27 +72,6 @@ public class SalesFragmentTab extends Fragment {
             @Override
             public void onResponse(Response<SalesStock> response) {
                 SalesFragmentTab.this.salesStock = response.body();
-
-//                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//                builder.setTitle("종료 확인 대화 상자")
-//                        .setMessage("앱을 종료 하시 겠습니까?")
-//                        .setCancelable(false)
-//                        .setPositiveButton("확인", new DialogInterface.OnClickListener(){
-//                            // 확인 버튼 클릭시 설정
-//                            public void onClick(DialogInterface dialog, int whichButton){
-//                                getActivity().finish();
-//                  //        getActivity().finish();          }
-//                        })
-//                        .setNegativeButton("취소", new DialogInterface.OnClickListener(){
-//                            // 취소 버튼 클릭시 설정
-//                            public void onClick(DialogInterface dialog, int whichButton){
-//                                dialog.cancel();
-//                            }
-//                        });
-//
-//                AlertDialog dialog = builder.create();
-//                dialog.show();
-
                 getActivity().finish();
             }
 
@@ -101,6 +80,7 @@ public class SalesFragmentTab extends Fragment {
                 Log.i("test", t.getMessage());
             }
         });
-
     }
+
+
 }

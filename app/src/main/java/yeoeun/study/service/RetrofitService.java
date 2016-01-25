@@ -7,7 +7,7 @@ import retrofit2.Retrofit;
  * Created by elite on 16. 1. 21..
  */
 public class RetrofitService {
-    static final String IP_ADDR = "http://10.10.0.164:5555";
+    static final String IP_ADDR = "http://10.10.0.57:5555";
     private static RetrofitService instance;
 
     private RetrofitService() {

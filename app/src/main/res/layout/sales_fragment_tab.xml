@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="_개 판매" />
+        android:text="판매 후 재고량 : " />
 
     <Button
         android:id="@+id/sales_fragment_button"
